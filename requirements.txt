@@ -4,7 +4,6 @@ attrs==19.1.0
 blinker==1.4
 certifi==2019.6.16
 chardet==3.0.4
-clang==8.0.1
 Click==7.0
 cs50==4.0.2
 execnet==1.7.1
