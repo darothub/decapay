@@ -5,7 +5,7 @@ import smtplib
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_mail import Mail, Message
-# from flask_session import Session
+from flask_session import Session
 from helpers import location
 from helpers import naira, login_required
 import datetime
