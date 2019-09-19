@@ -1,0 +1,5 @@
+ applications:
+  - name: decapay
+    random-route: true
+    memory: 64M
+    buildpack: 'https://github.com/cloudfoundry/java-buildpack#v3.19.2'
