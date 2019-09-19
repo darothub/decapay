@@ -65,7 +65,7 @@ block main %}
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">PMT No</th>
+          <!-- <th scope="col">PMT No</th> -->
           <th scope="col">Payment Date</th>
           <th scope="col">Begining Balance</th>
           <th scope="col">Payment</th>
@@ -90,14 +90,14 @@ block main %}
         {% endfor %}  -->
         {% for x in userHistory %}
         <tr>
-          <td>{{ x.loan_id }}</td>
+          <!-- <td>{{ x.loan_id }}</td> -->
           <td>{{ x.due_date }}</td>
           <td>{{ x.begining_balance }}</td>
           <td>{{ x.monthly_payment }}</td>
           <td>{{ x.principal }}</td>
           <td>₦{{ x.interest }}</td>
           <td>{{ x.ending_balance }}</td>
-          <td>{{ x.status }}</td>
+          <td>unconfirmed</td>
         </tr>
         {% endfor %}
       </tbody>
