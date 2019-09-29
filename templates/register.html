@@ -54,7 +54,7 @@
             type="text"
             id="user"
             name="username"
-            class="form-control"
+            class="form-control input"
             placeholder="username"
             value="{{username}}"
           required/>
@@ -94,7 +94,7 @@
           <label for="inputPassword4">Password</label>
           <input
             type="password"
-            class="form-control"
+            class="form-control input"
             name="password"
             id="inputPassword4"
             placeholder="Password"
@@ -135,21 +135,21 @@
 
         <div class="form-group col-md-6">
           <label for="inputState">State</label>
-          <select name="state" id="inputState" class="form-control">
+          <select name="state" id="inputState" class="form-control inputs">
             <option value="" selected disabled>Choose state</option>
             {% for state in message_get %}
-            <option value="{{ state['state'] }}">{{ state["state"] }}</option>
+            <option value="{{ state['state']['name'] }}" class="state">{{ state["state"]["name"] }}</option>
             {% endfor %}
           </select>
         </div>
 
         <div class="form-group col-md-6">
           <label for="inputCity">City</label>
-          <select name="city" id="inputState" class="form-control">
+          <select name="city" id="city" class="form-control">
             <option value="" selected disabled> Choose city</option>
-            {% for obj in message_get %} {% for city in obj['cities'] %}
-            <option value="{{ city }}">{{ city }}</option>
-            {% endfor %} {% endfor %}
+            {% for obj in message %}
+            <option value="{{ obj['name'] }}" id="city">{{ obj['name'] }}</option>
+            {% endfor %}
           </select>
         </div>
       </div>
@@ -191,5 +191,29 @@
       e.preventDefault();
     });
   });
+  $(document).ready(function () {
+    var cities;
+
+      console.log("hey");
+      $(".inputs").change(function (e) {
+        $('#city option[id="city"]').remove()
+        let state = $(this).val();
+        console.log($(this).val());
+
+        jQuery.get(`/getcity?q=${state}`, function (data) {
+          console.log(data);
+          $.each( data, function(index, item){
+            console.log(item)
+            cities = `<option value=${item['name']} id=city>${item['name']}</option>`
+            
+            $('#city').append(cities)
+           
+          })
+          //  return false;
+          
+        });
+        e.preventDefault();
+      });
+    });
 </script>
 {% endblock %}

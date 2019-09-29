@@ -1,5 +1,6 @@
 import os
 import re
+import json
 from cs50 import SQL
 import smtplib
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
@@ -86,10 +87,26 @@ def login():
 def check():
     """Return true if username available, else false, in JSON format"""
     q = request.args.get("q")
+    print(q)
     rows = db.execute(
         "SELECT * FROM users WHERE username = :username", username=q)
     if (rows):
         return jsonify(message="True")
+    return jsonify(message="False")
+
+
+@app.route("/getcity", methods=["GET"])
+def getcity():
+    """Return true if state is available"""
+    state = request.args.get("q")
+    print(state)
+    with open('statecities.json', 'r') as f:
+            content = json.load(f)
+    for item in content:
+        if item['state']['name'] == state:
+            message_city = jsonify(item['state']['locals'])
+            print(item['state']['locals'])
+            return message_city
     return jsonify(message="False")
 
 
@@ -98,6 +115,7 @@ def register():
     # render page on get request
     if request.method == 'GET':
         response = location()
+        # print(response)
         return render_template("register.html",  message_get=response)
     elif request.method == 'POST':
         response = location()

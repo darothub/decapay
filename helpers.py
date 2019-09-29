@@ -1,6 +1,7 @@
 # import os
 import requests
 import urllib.parse
+import json
 
 from flask import redirect, render_template, request, session
 from functools import wraps
@@ -23,14 +24,15 @@ def location():
 
 # Contact API
     try:
-        response = requests.get("http://locationsng-api.herokuapp.com/api/v1/cities")
-        response.raise_for_status()
+        with open('statecities.json', 'r') as f:
+            content = json.load(f)
+
     except requests.RequestException:
         return None
 
     # Parse response
     try:
-        location = response.json()
+        location = content
         return location
     except (KeyError, TypeError, ValueError):
         return None
