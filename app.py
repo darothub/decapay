@@ -10,9 +10,6 @@ from helpers import location
 from helpers import naira, login_required
 import datetime
 from dateutil.relativedelta import relativedelta
-
-
-
 app = Flask(__name__)
 
 # Configure CS50 Library to use SQLite database
@@ -23,8 +20,6 @@ server = smtplib.SMTP(host="smtp.gmail.com", port=587)
 server.ehlo()
 server.starttls()
 server.login("decapays@gmail.com", "Decagon111")
-
-
 
 # app.config['SESSION_TYPE'] = 'memcached'
 app.secret_key = os.urandom(24)
